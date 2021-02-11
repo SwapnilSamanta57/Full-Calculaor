@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Senior Calculator </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="user-scalable=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/lib,s/normalize/5.0.0/normalize.min.css">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="calc">
+      <div class="calc_display">
+        <label for="" class="calc_display-query">
+          <span class="calc_clipboard" id="CopyOp"><i class="fa fa-copy"></i></span>
+          <input class="calc_display-query_text" id="EvalResult" type="text" placeholder="Enter a expression below"
+            readonly="true">
+        </label>
+        <label for="" class="calc_display-input">
+          <span class="calc_clipboard" id="CopyResult"><i class="fa fa-copy"></i></span>
+          <span class="calc_clipboard" id="PasteResult"><i class="fa fa-paste"></i></span>
+          <input class="calc_display-query_text" id="UserInput" type="text" readonly="true">
+        </label>
+      </div>
+      <label for="" class="show_layer noselect prev" id="PrevButton"><i class="fa fa-caret-left"></i></label>
+      <label for="" class="show_layer noselect next" id="NextButton"><i class="fa fa-caret-right"></i></label>
+      <input id="ShowAdvanced" type="checkbox" />
+      <label class="show_advanced noselect" for="ShowAdvanced">
+        <i class="fa fa-bars"></i>
+      </label>
+      <input id="Layer1" type="radio" name="Layers" checked="checked" />
+      <label class="show_layer noselect layer_one" for="Layer1">
+        <span>1</span>
+      </label>
+      <input id="Layer2" type="radio" name="Layers" />
+      <label class="show_layer noselect layer_two" for="Layer2">
+        <span>2</span>
+      </label>
+      <div class="calc_wrapper" id="CalcNumpad">
+        <div class="calc_buttons advanced_controls">
+          <div class="calc_buttons-row">
+            <label data-val="mc" class="calc_button memory full">
+              <span class="calc_text">mc</span>
+            </label>
+            <label data-val="m+" class="calc_button memory full">
+              <span class="calc_text">m<i class="calc_color">+</i></span>
+            </label>
+            <label data-val="m-" class="calc_button memory full">
+              <span class="calc_text">m<i class="calc_color">-</i></span>
+            </label>
+            <label data-val="mr" class="calc_button memory full">
+              <span class="calc_text">mr</span>
+            </label>
+            <label data-val="(pi)" class="calc_button core main-option full">
+              <span class="calc_text">&pi;</span>
+            </label>
+            <label data-val="i" class="calc_button core shift-option full">
+              <span class="calc_text">i</span>
+            </label>
+          </div>
+          <div class="calc_buttons-row">
+            <label data-val="sin(" class="calc_button core main-option full">
+              <span class="calc_text">sin</span>
+            </label>
+            <label data-val="cos(" class="calc_button core main-option full">
+              <span class="calc_text">cos</span>
+            </label>
+            <label data-val="tan(" class="calc_button core main-option full">
+              <span class="calc_text">tan</span>
+            </label>
+            <label data-val="asin(" class="calc_button core shift-option full">
+              <span class="calc_text"><i class="calc_color">a</i>sin</span>
+            </label>
+            <label data-val="acos(" class="calc_button core shift-option full">
+              <span class="calc_text"><i class="calc_color">a</i>cos</span>
+            </label>
+            <label data-val="atan(" class="calc_button core shift-option full">
+              <span class="calc_text"><i class="calc_color">a</i>tan</span>
+            </label>
+            <label data-val="log(" class="calc_button core shift-option full">
+              <span class="calc_text">log</span>
+            </label>
+            <label data-val="sqrt(" class="calc_button core main-option full">
+              <span class="calc_text"><span class="sup">2</span> <span class="calc_color">&radic; </span>x</span>
+            </label>
+            <label data-val="log10(" class="calc_button core shift-option full">
+              <span class="calc_text">log<span class="sub calc_color">10</span></span>
+            </label>
+            <label data-val="cbrt(" class="calc_button core main-option full">
+              <span class="calc_text"><span class="sup">3</span> <span class="calc_color">&radic; </span>x</span>
+            </label>
+          </div>
+          <!--end:row-->
+          <div class="calc_buttons-row">
+            <label data-val="csc(" class="calc_button core main-option full">
+              <span class="calc_text">csc</span>
+            </label>
+            <label data-val="sec(" class="calc_button core main-option full">
+              <span class="calc_text">sec</span>
+            </label>
+            <label data-val="cot(" class="calc_button core main-option full">
+              <span class="calc_text">cot</span>
+            </label>
+            <label data-val="acsc(" class="calc_button core shift-option full">
+              <span class="calc_text"><i class="calc_color">a</i>csc</span>
+            </label>
+            <label data-val="asec(" class="calc_button core shift-option full">
+              <span class="calc_text"><i class="calc_color">a</i>sec</span>
+            </label>
+            <label data-val="acot(" class="calc_button core shift-option full">
+              <span class="calc_text"><i class="calc_color">a</i>cot</span>
+            </label>
+            <label data-val="(e)" class="calc_button core shift-option full">
+              <span class="calc_text">e</span>
+            </label>
+            <label data-val="^2" class="calc_button core main-option full">
+              <span class="calc_text">x<span class="sup calc_color">2</span></span>
+            </label>
+            <label data-val="(e)^" class="calc_button core shift-option full">
+              <span class="calc_text">e<span class="sup calc_color">x</span></span>
+            </label>
+            <label data-val="^3" class="calc_button core main-option full">
+              <span class="calc_text">x<span class="sup calc_color">3</span></span>
+            </label>
+          </div>
+          <!--end:row-->
+          <div class="calc_buttons-row">
+            <label data-val="sinh(" class="calc_button core main-option full">
+              <span class="calc_text">sin<i class="calc_color">h</i></span>
+            </label>
+            <label data-val="cosh(" class="calc_button core main-option full">
+              <span class="calc_text">cos<i class="calc_color">h</i></span>
+            </label>
+            <label data-val="tanh(" class="calc_button core main-option full">
+              <span class="calc_text">tan<i class="calc_color">h</i></span>
+            </label>
+            <label data-val="asinh(" class="calc_button core shift-option full">
+              <span class="calc_text"><i class="calc_color">a</i>sin<i class="calc_color">h</i></span>
+            </label>
+            <label data-val="acosh(" class="calc_button core shift-option full">
+              <span class="calc_text"><i class="calc_color">a</i>cos<i class="calc_color">h</i></span>
+            </label>
+            <label data-val="atanh(" class="calc_button core shift-option full">
+              <span class="calc_text"><i class="calc_color">a</i>tan<i class="calc_color">h</i></span>
+            </label>
+            <label data-val="derivative" class="calc_button full" id="Derivative">
+              <span class="calc_text">x<i class="calc_color">'</i></span>
+            </label>
+            <label data-val="integral" class="calc_button integral full" id="Integral">
+              <span class="calc_text"><i class="calc_color">&int;</i> x</span>
+            </label>
+          </div>
+          <!--end:row-->
+          <div class="calc_buttons-row">
+            <label data-val="csch(" class="calc_button core main-option full">
+              <span class="calc_text">csc<i class="calc_color">h</i></span>
+            </label>
+            <label data-val="sech(" class="calc_button core main-option full">
+              <span class="calc_text">sec<i class="calc_color">h</i></span>
+            </label>
+            <label data-val="coth(" class="calc_button core main-option full">
+              <span class="calc_text">cot<i class="calc_color">h</i></span>
+            </label>
+            <label data-val="acsch(" class="calc_button core shift-option full">
+              <span class="calc_text"><i class="calc_color">a</i>csc<i class="calc_color">h</i></span>
+            </label>
+            <label data-val="asech(" class="calc_button core shift-option full">
+              <span class="calc_text"><i class="calc_color">a</i>sec<i class="calc_color">h</i></span>
+            </label>
+            <label data-val="acoth(" class="calc_button core shift-option full">
+              <span class="calc_text"><i class="calc_color">a</i>cot<i class="calc_color">h</i></span>
+            </label>
+            <label data-val="x" class="calc_button core full">
+              <span class="calc_text">x</span>
+            </label>
+            <label data-val="y" class="calc_button core full">
+              <span class="calc_text">y</i></span>
+            </label>
+          </div>
+          <!--end:row-->
+        </div>
+        <div class="calc_buttons main_controls">
+          <div class="calc_buttons-row">
+            <div data-val="C" class="calc_button clear main" id="Clear" readonly="readonly">
+              <span class="calc_text noselect">C</span>
+            </div>
+            <label data-val="(" class="calc_button core">
+              <span class="calc_text">(</span>
+            </label>
+            <label data-val=")" class="calc_button core">
+              <span class="calc_text">)</span>
+            </label>
+            <label data-val="%" class="calc_button core">
+              <span class="calc_text">Mod</span>
+            </label>
+            <label data-val="del" class="calc_button delete" id="Delete">
+              <span class="calc_text">Del</span>
+            </label>
+          </div>
+          <!--end:row-->
+          <div class="calc_buttons-row">
+            <label data-val="^(1/" class="calc_button main-option core">
+              <span class="calc_text"><span class="sup">x</span> <span class="calc_color">&radic; </span>x</span>
+            </label>
+            <label data-val="nthRoot(" class="calc_button shift-option core">
+              <span class="calc_text"><span class="sup calc_color">x</span> &radic; <span
+                  class="calc_color">x</span></span>
+            </label>
+            <label data-val="7" class="calc_button digit">
+              <span class="calc_text">7</span>
+            </label>
+            <label data-val="8" class="calc_button digit">
+              <span class="calc_text">8</span>
+            </label>
+            <label data-val="9" class="calc_button digit">
+              <span class="calc_text">9</span>
+            </label>
+            <label data-val="/" class="calc_button core">
+              <span class="calc_text">&divide;</span>
+            </label>
+          </div>
+          <!--end:row-->
+          <div class="calc_buttons-row">
+            <label data-val="^" class="calc_button core">
+              <span class="calc_text">x<span class="sup calc_color">y</span></span>
+            </label>
+            <label data-val="4" class="calc_button digit">
+              <span class="calc_text">4</span>
+            </label>
+            <label data-val="5" class="calc_button digit">
+              <span class="calc_text">5</span>
+            </label>
+            <label data-val="6" class="calc_button digit">
+              <span class="calc_text">6</span>
+            </label>
+            <label data-val="*" class="calc_button core">
+              <span class="calc_text">&times;</span>
+            </label>
+          </div>
+          <!--end:row-->
+          <div class="calc_buttons-row">
+            <label data-val="!" class="calc_button core">
+              <span class="calc_text">x<i class="calc_color">!</i></span>
+            </label>
+            <label data-val="1" class="calc_button digit">
+              <span class="calc_text">1</span>
+            </label>
+            <label data-val="2" class="calc_button digit">
+              <span class="calc_text">2</span>
+            </label>
+            <label data-val="3" class="calc_button digit">
+              <span class="calc_text">3</span>
+            </label>
+            <label data-val="-" class="calc_button core">
+              <span class="calc_text">&#8211;</span>
+            </label>
+          </div>
+          <!--end:row-->
+          <div class="calc_buttons-row">
+            <label data-val="," class="calc_button core calc_color">
+              <span class="calc_text calc_color">&#44;</span>
+            </label>
+            <label data-val="." class="calc_button core">
+              <span class="calc_text calc_color">.</span>
+            </label>
+            <label data-val="0" class="calc_button digit">
+              <span class="calc_text">0</span>
+            </label>
+            <label data-val="=" class="calc_button eval" id="Eval">
+              <span class="calc_text">=</span>
+            </label>
+            <label data-val="+" class="calc_button core">
+              <span class="calc_text">+</span>
+            </label>
+          </div>
+          <!--end:row-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- partial -->
+  <script src='https://hammerjs.github.io/dist/hammer.min.js'></script>
+  <script src='https://cdn.rawgit.com/davidedc/Algebrite/master/dist/algebrite.bundle-for-browser.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.9.2/math.min.js'></script>
+  <script src="./script.js"></script>
+  
+  <style type="text/css">
+    /* Predefined Break-points */
+    *,
+    *:before,
+    *:after,
+    *:active,
+    *:hover,
+    *:focus {
+      box-sizing: border-box;
+      outline: none !important;
+      -webkit-user-select: none !important;
+      -moz-user-select: none !important;
+      -ms-user-select: none !important;
+      user-select: none !important;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-weight: 300;
+      font-family: "Lato", sans-serif;
+      background: linear-gradient(#f46f48, #eb3434);
+    }
+
+    .container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+    }
+
+    .calc {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      top: 0%;
+      left: 0%;
+    }
+
+    @media (min-width: 768px) {
+      .calc {
+        width: 80vw;
+        height: 80vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 20px 80px 0 rgba(0, 0, 0, 0.14);
+      }
+    }
+
+    .calc_wrapper {
+      width: 100%;
+      background-color: #323232;
+      border-bottom-left-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+      height: calc(100% - 4rem * 2);
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .calc_buttons {
+      width: 100%;
+      height: calc(100% - 4rem * 2);
+      display: flex;
+      flex-direction: column;
+      background-color: #323232;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .calc_buttons.main_controls {
+      position: absolute;
+      width: 100%;
+      top: 8rem;
+      z-index: 2;
+    }
+
+    @media (min-width: 480px) {
+      .calc_buttons.main_controls {
+        width: 50%;
+        left: 50%;
+        padding-left: 0;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .calc_buttons.main_controls {
+        border-bottom-right-radius: 0.5rem;
+      }
+    }
+
+    .calc_buttons.advanced_controls {
+      position: absolute;
+      width: 100%;
+      top: 8rem;
+      z-index: 3;
+      left: -100vw;
+      transition: .5s all ease;
+    }
+
+    @media (min-width: 480px) {
+      .calc_buttons.advanced_controls {
+        width: 50%;
+        left: 0;
+        padding-right: 0;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .calc_buttons.advanced_controls {
+        border-bottom-left-radius: 0.5rem;
+      }
+    }
+
+    .calc_buttons-row {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .calc_button {
+      flex: 1 1;
+      height: 100%;
+      position: relative;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .calc_button.clear,
+    .calc_button.delete,
+    .calc_button.eval {
+      color: #ff4b1f;
+    }
+
+    .calc_display {
+      height: calc(4rem * 2);
+      background: #fcfcfc;
+      background-color: #fcfcfc;
+    }
+
+    @media (min-width: 768px) {
+      .calc_display {
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+      }
+    }
+
+    .calc_clipboard {
+      float: left;
+      display: inline-block;
+      line-height: 2rem;
+      width: 2rem;
+      text-align: center;
+      color: #7c7c7c;
+      font-size: 1.25rem;
+      cursor: pointer;
+      opacity: .25;
+    }
+
+    .calc_clipboard:hover {
+      color: #323232;
+      opacity: 1;
+    }
+
+    .calc_buttons,
+    .calc_display {
+      padding: 1rem;
+    }
+
+    .calc_display-query {
+      font-size: 1rem;
+      padding-right: 1rem;
+      color: #323232;
+      font-weight: 300;
+      width: 100%;
+      display: inline-block;
+      cursor: pointer;
+      text-align: right;
+    }
+
+    .calc_display-query:hover .calc_clipboard {
+      opacity: .5;
+    }
+
+    .calc_display-query .calc_clipboard {
+      line-height: 2rem;
+    }
+
+    .calc_display-query .calc_display-query_text {
+      width: calc(100% - 2rem);
+      line-height: 2rem;
+      height: 2rem;
+    }
+
+    .calc_display-query_text {
+      text-align: right;
+      padding-left: 0.5rem;
+    }
+
+    .calc_display-input {
+      line-height: 4rem;
+      font-size: 3rem;
+      padding-right: 1rem;
+      color: #323232;
+      text-align: right;
+      width: 100%;
+      display: inline-block;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .calc_display-input:hover .calc_clipboard {
+      opacity: .5;
+    }
+
+    .calc_display-input .calc_clipboard {
+      line-height: 4rem;
+    }
+
+    .calc_display-input .calc_display-query_text {
+      width: calc(100% - 4rem);
+      line-height: 2rem;
+    }
+
+    .calc input[type="text"] {
+      border: 0;
+      outline: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      font-weight: 300;
+      font-family: "Lato", sans-serif;
+      cursor: pointer;
+      background: transparent;
+      background-color: transparent;
+    }
+
+    .calc_checkbox[type="checkbox"] {
+      display: none;
+    }
+
+    .calc_checkbox[type="radio"] {
+      display: none;
+    }
+
+    .calc textarea {
+      resize: none;
+      border: 0;
+      outline: none;
+      font-weight: 300;
+      font-family: "Lato", sans-serif;
+      background: transparent;
+      background-color: transparent;
+    }
+
+    .calc_text {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .calc_button,
+    .calc_button-eval {
+      background-color: #323232;
+      color: #7c7c7c;
+      cursor: pointer;
+      transition: .25s all ease;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .calc_button.core,
+    .calc_button-eval.core {
+      background-color: #323232;
+      color: #7c7c7c;
+    }
+
+    .calc_button .over,
+    .calc_button-eval .over {
+      text-decoration: overline;
+      display: inline-block;
+      position: relative;
+      top: 3px;
+      left: -4px;
+    }
+
+    .calc_button .sub,
+    .calc_button .sup,
+    .calc_button-eval .sub,
+    .calc_button-eval .sup {
+      font-size: 0.65em;
+      position: relative;
+      left: 0.1em;
+    }
+
+    .calc_button .sup,
+    .calc_button-eval .sup {
+      top: -0.8em;
+    }
+
+    .calc_button .sub,
+    .calc_button-eval .sub {
+      top: .8em;
+    }
+
+    .calc_button.digit,
+    .calc_button-eval.digit {
+      background-color: #323232;
+      color: #fcfcfc;
+      font-size: 1.25rem;
+    }
+
+    .calc_button:not(.digit),
+    .calc_button-eval:not(.digit) {
+      font-size: 1rem;
+    }
+
+    .calc_button:hover,
+    .calc_button-eval:hover {
+      color: #fcfcfc;
+    }
+
+    .calc_color {
+      color: #ff4b1f;
+    }
+
+    .calc .shift-option {
+      display: none;
+    }
+
+    #ShowAdvanced {
+      display: none;
+    }
+
+    #ShowAdvanced:checked~.show_advanced {
+      color: #fcfcfc;
+    }
+
+    #ShowAdvanced:checked~.show_layer.layer_one {
+      right: calc(100% - 3rem - 2rem);
+    }
+
+    #ShowAdvanced:checked~.show_layer.layer_two {
+      right: calc(100% - 3rem - 2rem * 2);
+    }
+
+    @media (min-width: 480px) {
+      #ShowAdvanced:checked~.show_layer.layer_one {
+        right: calc(100% - 2rem);
+      }
+
+      #ShowAdvanced:checked~.show_layer.layer_two {
+        right: calc(100% - 2rem * 2);
+      }
+    }
+
+    #ShowAdvanced:checked~.calc_wrapper .advanced_controls {
+      z-index: 3;
+      left: 0;
+    }
+
+    .show_advanced {
+      position: absolute;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      cursor: pointer;
+      top: 7rem;
+      z-index: 5;
+      background: linear-gradient(#f46f48, #eb3434);
+      color: #323232;
+      width: 3rem;
+      height: 2rem;
+      line-height: 2rem;
+      text-align: center;
+      right: calc(100% - 3rem);
+      transition: right .5s ease;
+    }
+
+    @media (min-width: 480px) {
+      .show_advanced {
+        display: none;
+      }
+    }
+
+    .show_layer {
+      position: absolute;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      cursor: pointer;
+      top: 7rem;
+      z-index: 4;
+      background: linear-gradient(#f46f48, #eb3434);
+      color: #fcfcfc;
+      width: 2rem;
+      height: 2rem;
+      line-height: 2rem;
+      text-align: center;
+      right: 100%;
+      transition: right .5s ease;
+      color: #323232;
+      transition: .5s all ease-out;
+    }
+
+    @media (min-width: 480px) {
+      .show_layer.layer_one {
+        right: calc(100% - 2rem);
+      }
+
+      .show_layer.layer_two {
+        right: calc(100% - 2rem * 2);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .show_layer {
+        border-radius: 2rem;
+      }
+    }
+
+    .show_layer.prev {
+      right: 2rem;
+    }
+
+    .show_layer.prev:hover {
+      color: #fcfcfc;
+    }
+
+    .show_layer.next {
+      right: 0;
+    }
+
+    .show_layer.next:hover {
+      color: #fcfcfc;
+    }
+
+    #Layer1 {
+      display: none;
+    }
+
+    #Layer1:checked~.layer_one {
+      color: #fcfcfc;
+    }
+
+    #Layer2 {
+      display: none;
+    }
+
+    #Layer2:checked~.layer_two {
+      color: #fcfcfc;
+    }
+
+    #Layer2:checked~.calc_wrapper .main-option {
+      display: none;
+    }
+
+    #Layer2:checked~.calc_wrapper .shift-option {
+      display: flex;
+    }
+
+    .noselect {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    }
+
+    ::-webkit-input-placeholder {
+      /* WebKit, Blink, Edge */
+      font-weight: 300;
+      font-family: "Lato", sans-serif;
+      line-height: 2rem;
+    }
+
+    :-moz-placeholder {
+      /* Mozilla Firefox 4 to 18 */
+      font-weight: 300;
+      font-family: "Lato", sans-serif;
+      line-height: 2rem;
+    }
+
+    ::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      font-weight: 300;
+      font-family: "Lato", sans-serif;
+      line-height: 2rem;
+    }
+
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      font-weight: 300;
+      font-family: "Lato", sans-serif;
+      line-height: 2rem;
+    }
+  </style>
+
+
+
+  <script type="text/javascript">
+    "use strict";
+
+    console.clear();
+    window.onload = function () {
+
+      var Model = {
+        expressionToEval: "",
+        historyArray: [],
+        mmry: "",
+        result: 0,
+        clipboard: "",
+        currentIndex: 0,
+        outputExp: "",
+        outputDisplay: "",
+        evaluateFunction: function evaluateFunction(opt) {
+          if (!this.outputDisplay) {
+            this.outputExp = "Enter a valid expression";
+            this.outputDisplay = "";
+          } else {
+            var expToEval = this.outputDisplay;
+            try {
+              if (opt === 'Integral') {
+                this.result = Algebrite.run('integral(' + expToEval + ')');
+              } else if (opt === 'Derivative') {
+                this.result = Algebrite.run('d(' + expToEval + ')');
+              } else {
+                if (/x|y/g.test(expToEval)) {
+                  this.result = Algebrite.run(expToEval);
+                } else {
+                  // number, BigNumber, Fraction
+                  var mathAPI = math.create({ number: 'number' });
+                  this.result = mathAPI.eval(expToEval).toString();
+                }
+              }
+              var resultObject = {};
+              resultObject.expression = expToEval;
+              resultObject.result = this.result;
+              this.historyArray.push(resultObject);
+              this.currentIndex = this.historyArray.length - 1;
+
+              this.outputExp = this.historyArray[this.currentIndex].expression;
+              this.outputDisplay = this.historyArray[this.currentIndex].result;
+            } catch (e) {
+              var resultObject = {};
+              resultObject.expression = this.expressionToEval;
+              resultObject.result = e;
+              this.historyArray.push(resultObject);
+
+              this.outputExp = this.historyArray[this.currentIndex].expToEval;
+              this.outputDisplay = this.historyArray[this.currentIndex].e;
+            }
+          }
+        },
+        updateClipboard: function updateClipboard(value) {
+
+          this.clipboard = value;
+        },
+        pasteHandler: function pasteHandler() {
+
+          this.outputDisplay += this.clipboard;
+        },
+        historyHandle: function historyHandle(direction) {
+          switch (direction) {
+            case "Prev":
+              if (!this.historyArray.length || this.historyArray.length == 0) {
+                return;
+              }
+              this.currentIndex = this.currentIndex > 0 ? this.currentIndex -= 1 : 0;
+              this.outputExp = this.historyArray[this.currentIndex].expression;
+              this.outputDisplay = this.historyArray[this.currentIndex].result;
+              break;
+            case "Next":
+              if (!this.historyArray.length || this.historyArray.length == 0) {
+                return;
+              }
+              this.currentIndex = this.currentIndex < this.historyArray.length - 1 ? this.currentIndex += 1 : this.historyArray.length - 1;
+              this.outputExp = this.historyArray[this.currentIndex].expression;
+              this.outputDisplay = this.historyArray[this.currentIndex].result;
+              break;
+              break;
+            default:
+              alert('error');
+          }
+        },
+        deleteHandle: function deleteHandle() {
+
+          this.outputDisplay = this.outputDisplay.length > 0 ? this.outputDisplay.substring(0, this.outputDisplay.length - 1) : "";
+        },
+        clearHandle: function clearHandle() {
+          this.outputExp = "";
+          this.outputDisplay = "";
+        },
+        inputHandle: function inputHandle(key) {
+
+          this.outputDisplay += key;
+        },
+        memoryHandle: function memoryHandle(arg) {
+          switch (arg) {
+            //case "m+":
+            case "mc":
+              this.mmry = "";
+              break;
+            case "m+":
+              this.mmry = this.mmry.length > 0 ? (this.mmry + '+' + this.outputDisplay) : (this.outputDisplay.length > 0 ? this.outputDisplay : "");
+              break;
+            case "m-":
+              this.mmry = this.mmry.length > 0 ? (this.mmry + '-' + this.outputDisplay) : (this.outputDisplay.length > 0 ? this.outputDisplay : "");
+              break;
+            case "mr":
+              this.mmry = this.mmry.length > 0 ? Algebrite.run(this.mmry) : "";
+              this.outputDisplay += this.mmry;
+              break;
+            default:
+              alert('error');
+          }
+        },
+        userPasteHandle: function userPasteHandle(data) {
+          this.clipboard = data;
+          this.outputDisplay += data;
+        }
+      };
+
+      var View = {
+        btnEval: document.getElementById('Eval'),
+        btnDerivative: document.getElementById('Derivative'),
+        btnIntegral: document.getElementById('Integral'),
+        userInput: document.getElementById('UserInput'),
+        evalResult: document.getElementById('EvalResult'),
+        copyOp: document.getElementById('CopyOp'),
+        copyResult: document.getElementById('CopyResult'),
+        pasteResult: document.getElementById('PasteResult'),
+        prevButton: document.getElementById('PrevButton'),
+        nextButton: document.getElementById('NextButton'),
+        deleteButton: document.getElementById('Delete'),
+        clearButton: document.getElementById('Clear'),
+        render: function render(M) {
+          //console.log(M);
+          document.getElementById('EvalResult').value = M.outputExp;
+          document.getElementById('UserInput').value = M.outputDisplay;
+        },
+        init: function init(C) {
+
+          // Evaluation buttons'
+          this.btnEval.onclick = function () {
+            C.evalHandler('Eval');
+          }
+          this.btnDerivative.onclick = function () {
+            C.evalHandler('Derivative');
+          }
+          this.btnIntegral.onclick = function () {
+            C.evalHandler('Integral');
+          }
+
+          // Input expression text area
+          this.userInput.onclick = function () {
+            C.handleCopy(this.userInput);
+          }
+
+          // Output expression text area
+          this.evalResult.onclick = function () {
+            C.handleCopy(this.evalResult);
+          }
+
+          // Copy output button
+          this.copyOp.onclick = function () {
+            C.handleCopy(this.evalResult);
+          }
+
+          // Copy result button
+          this.copyResult.onclick = function () {
+            C.handleCopy(this.userInput);
+          }
+
+          // Paste result button
+          this.pasteResult.onclick = function () {
+            C.handlePaste();
+          }
+
+          // Navigation Prev button
+          this.prevButton.onclick = function () {
+            C.handleHistory('Prev');
+          };
+          // Navigation Next button
+          this.nextButton.onclick = function () {
+            C.handleHistory('Next');
+          };
+          // Delete button
+          this.deleteButton.onclick = function () {
+            C.handleDelete();
+          };
+          // Clear button
+          this.clearButton.onclick = function () {
+            C.handleClear();
+          };
+
+          // Digits buttons
+          var digits = document.getElementsByClassName('digit');
+          for (var i = 0; i < digits.length; ++i) {
+            var item = digits[i].onclick = function () {
+              var selectedDigit = this.getAttribute('data-val');
+              C.handleInput(selectedDigit);
+            };
+          }
+
+          // Non Digits buttons
+          var cores = document.getElementsByClassName('core');
+          for (var i = 0; i < cores.length; ++i) {
+            var item = cores[i].onclick = function () {
+              var selectedCore = this.getAttribute('data-val');
+              C.handleInput(selectedCore);
+            };
+          }
+
+          //Memory buttons
+          var memory = document.getElementsByClassName('memory');
+          for (var i = 0; i < memory.length; ++i) {
+            var item = memory[i].onclick = function () {
+              var selectedMemory = this.getAttribute('data-val');
+              C.handleMemory(selectedMemory);
+            };
+          }
+
+          //Window events
+          //window.addEventListener('paste', C.handleUserPaste);
+          window.addEventListener("paste", function (e) {
+            var clipboardData, pastedData;
+
+            // Stop data actually being pasted into div
+            e.stopPropagation();
+            e.preventDefault();
+
+            // Get pasted data via clipboard API
+            clipboardData = e.clipboardData || window.clipboardData;
+            pastedData = clipboardData.getData('Text');
+            C.handleUserPaste(pastedData);
+          });
+          // TODO: add pressed keys
+          window.addEventListener("keydown", function (event) {
+            if (event.keyCode == 13) {
+              event.preventDefault();
+              event.stopPropagation();
+              document.getElementById("Eval").click();
+            }
+            if (event.keyCode == 8) {
+              C.handleDelete();
+            }
+            if (event.keyCode == 46) {
+              C.handleClear();
+            }
+          });
+          window.addEventListener("keypress", function (event) {
+            var keyIn = event.keyIdentifier ? parseInt(event.keyIdentifier.substr(2), 16) : event.keyCode;
+            var charIn = String.fromCharCode(keyIn);
+            //console.log(keyIn);
+
+            if (/[+|-|*|\/|.|^|%|!|(|)|,|<|>|1|2|3|4|5|6|7|8|9|x|y|e|i|\-]/g.test(charIn)) {
+              C.handleInput(charIn);
+            }
+          });
+        }
+      };
+
+      var Controller = {
+        load: function load() {
+          // Singleton pattern
+          if (Controller.instance) {
+            return;
+          }
+          console.log(Controller.instance)
+          Controller.instance = this;
+          View.init(this);
+          View.render(Model);
+        },
+        evalHandler: function evalHandler(opts) {
+          Model.evaluateFunction(opts);
+          this.update();
+        },
+        update: function update() {
+
+          View.render(Model);
+        },
+        handleCopy: function handleCopy(elem) {
+          // create hidden text element, if it doesn't already exist
+          var targetId = "_hiddenCopyText_";
+          var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
+          var origSelectionStart, origSelectionEnd;
+          if (isInput) {
+            // can just use the original source element for the selection and copy
+            target = elem;
+            origSelectionStart = elem.selectionStart;
+            origSelectionEnd = elem.selectionEnd;
+          } else {
+            // must use a temporary form element for the selection and copy
+            target = document.getElementById(targetId);
+            if (!target) {
+              var target = document.createElement("textarea");
+              target.style.position = "absolute";
+              target.style.left = "-9999px";
+              target.style.top = "0";
+              target.id = targetId;
+              document.body.appendChild(target);
+            }
+            target.textContent = elem.textContent;
+          }
+          // select the content
+          var currentFocus = document.activeElement;
+          target.focus();
+          target.setSelectionRange(0, target.value.length);
+
+          // copy the selection
+          var succeed;
+          try {
+            succeed = document.execCommand("copy");
+          } catch (e) {
+            succeed = false;
+          }
+          // restore original focus
+          if (currentFocus && typeof currentFocus.focus === "function") {
+            currentFocus.focus();
+          }
+
+          if (isInput) {
+            // restore prior selection
+            elem.setSelectionRange(origSelectionStart, origSelectionEnd);
+          } else {
+            // clear temporary content
+            target.textContent = "";
+          }
+          Model.updateClipboard(elem.value);
+          return succeed;
+        },
+        handlePaste: function handlePaste() {
+          Model.pasteHandler();
+          View.render(Model);
+        },
+        handleHistory: function handleHistory(dir) {
+          Model.historyHandle(dir);
+          View.render(Model);
+        },
+        handleDelete: function handleDelete() {
+          Model.deleteHandle();
+          View.render(Model);
+        },
+        handleClear: function handleClear() {
+          Model.clearHandle();
+          View.render(Model);
+        },
+        handleInput: function handleInput(key) {
+          Model.inputHandle(key);
+          View.render(Model);
+        },
+        handleMemory: function handleMemory(arg) {
+          Model.memoryHandle(arg);
+          View.render(Model);
+        },
+        handleUserPaste: function handleUserPaste(data) {
+          Model.userPasteHandle(data);
+          View.render(Model);
+        }
+      };
+
+      Controller.load();
+    };
+
+    var myElement = document.getElementById('CalcNumpad');
+
+    // create a simple instance
+    // by default, it only adds horizontal recognizers
+    var mc = new Hammer(myElement);
+
+    // listen to events...
+    mc.on("swipeleft swiperight", function (ev) {
+      if (ev.type === 'swiperight') {
+        document.getElementById('ShowAdvanced').checked = true;
+      } else if (ev.type === 'swipeleft') {
+        document.getElementById('ShowAdvanced').checked = false;
+      }
+      console.log(ev.type + " gesture detected.");
+    });
+  </script>
+
+</body>
+
+</html>
